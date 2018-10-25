@@ -10,8 +10,8 @@
   vars:
     # Global SCAPL-frontend configuration
 
-    # python -c 'import crypt; print crypt.crypt("Password", "$1$SomeSalt$")'
-    sysadmin_password: "$1$SomeSalt$scvwMFYVX0/NNuksR2vvw1"
+    # python -c 'import crypt; print crypt.crypt("back to the roots", "$1$SomeSalt$")'
+    sysadmin_password: "$1$SomeSalt$LtUlD1y.JogMfbxzumljb1"
 
     # RabbitMQ configuration
     rabbitmq_vhost_definitions:
@@ -50,7 +50,7 @@
       - { src: "{{ automation_server }}", port: "ftp" }
       - { src: "{{ backend_server }}", port: "ftp" }
 
-# NO APP DEFINED FOR SCALP-BACKBONE
+# NO APP DEFINED FOR SCAPL-BACKBONE
 #    supervisor_apps:
 #      - supervisor_app_name: "first_app"
 #        supervisor_app_command: "yes"

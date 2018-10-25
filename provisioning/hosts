@@ -1,0 +1,14 @@
+[scapl-backbone]
+192.168.10.10 ansible_user=testoli ansible_become_pass='back to the roots'
+
+[scapl-frontend]
+192.168.10.20 ansible_user=testoli ansible_become_pass='back to the roots'
+
+[scapl-search]
+192.168.10.30 ansible_user=testoli ansible_become_pass='back to the roots'
+
+[scapl-automation]
+192.168.10.40 ansible_user=testoli ansible_become_pass='back to the roots'
+
+[scapl-backend]
+192.168.10.50 ansible_user=testoli ansible_become_pass='back to the roots'

@@ -37,7 +37,7 @@
   - name: Install baseline packages
     apt: pkg={{ item.package }}
          state=latest
-    with_items: baseline_packages
+    with_items: "{{ baseline_packages }}"
 
 # CIS Security Benchmarks for Ubuntu - Settings
 #  source: http://cis-ubuntu-ansible.readthedocs.org/en/latest/CIS_Ubuntu/#cis-security-bencmarks-for-ubuntu

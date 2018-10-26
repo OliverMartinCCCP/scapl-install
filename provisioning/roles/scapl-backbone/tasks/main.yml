@@ -13,7 +13,7 @@
 # Configure ufw rules
 - name: Configure ufw rules
   ufw: rule=allow src={{ item.src }} port={{ item.port }}
-  with_items: ufw_rules
+  with_items: "{{ ufw_rules }}"
   notify: Restart ufw
 
 # Create applications in supervisor

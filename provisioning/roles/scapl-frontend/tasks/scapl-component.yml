@@ -12,6 +12,7 @@
 - name: Install requirements
   pip:
     requirements: "{{ scapl_component_directory }}/requirements.txt"
+    executable: pip3
 
 # Copy configuration file
 - name: Copy configuration file

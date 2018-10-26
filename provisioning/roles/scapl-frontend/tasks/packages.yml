@@ -9,8 +9,12 @@
     pkg: "{{ item }}"
     state: latest
   with_items:
-    - python-dev
-    - python-pip
+    - lib32z1-dev
+    - libffi-dev
+    - libxml2
+    - libxslt1-dev
+    - python3-dev
+    - python3-pip
     - python-django
     - python-django-celery
 

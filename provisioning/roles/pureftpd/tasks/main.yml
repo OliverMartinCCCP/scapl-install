@@ -25,8 +25,11 @@
     owner: root
     group: root
     mode: 0644
-  with_dict: pureftpd_options
+  with_dict: "{{ pureftpd_options }}"
   when: item.key != 'TLSCipherSuite' or pureftpd_switches.stdout.find('tlsciphersuite') != -1
+
+#The file /etc/pure-ftpd/pureftpd.pdb needs to be created
+#Use: pure-pw mkdb
 
 - name: Pure-FTPD | Ensure Pure-FTPD is started
   service: 
@@ -81,7 +84,7 @@
 
 - name: Pure-FTPD | Lookup created virtual users
   command: "pure-pw show {{ item.username }}"
-  with_items: pureftpd_virtual_users
+  with_items: "{{ pureftpd_virtual_users }}"
   register: pure_ftpd_users_status
   ignore_errors: True
 
@@ -93,11 +96,11 @@
     group: root
     mode: 0600
   when: item.rc != 0
-  with_items: pure_ftpd_users_status.results
+  with_items: "{{ pure_ftpd_users_status.results }}"
   register: pure_ftpd_users
 
 - shell: "pure-pw useradd {{ item.username }} -u {{ item.virtual_user }} -d {{ item.virtual_home }} -m < /opt/pureftpd/{{ item.username }}.pwd"
-  with_items: pureftpd_virtual_users
+  with_items: "{{ pureftpd_virtual_users }}"
   when: pure_ftpd_users | changed
 
 - name: Pure-FTPD | Update user database

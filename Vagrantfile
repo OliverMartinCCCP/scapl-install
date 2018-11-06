@@ -46,8 +46,11 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
         when "backbone" # give a bit more capability to backbone (supporting RabbitMQ and the FTP server)
           vmware.vmx["memsize"] = 1024
           vmware.vmx["numvcpus"] = 2
+        when "backend"
+          vmware.vmx["memsize"] = 2048 # give a bit more capability to backend (running Cassandra)
+          vmware.vmx["numvcpus"] = 2
         else
-          vmware.vmx["memsize"] = 768
+          vmware.vmx["memsize"] = 512
           vmware.vmx["numvcpus"] = 1
         end
         vmware.vmx["usb.present"] = false # disable USB controller

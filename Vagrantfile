@@ -47,7 +47,7 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
           vmware.vmx["memsize"] = 1024
           vmware.vmx["numvcpus"] = 2
         else
-          vmware.vmx["memsize"] = 512
+          vmware.vmx["memsize"] = 768
           vmware.vmx["numvcpus"] = 1
         end
         vmware.vmx["usb.present"] = false # disable USB controller

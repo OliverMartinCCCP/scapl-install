@@ -1,0 +1,8 @@
+---
+- name: Ensure PostgreSQL databases are present.
+  postgresql_db:
+    name: "{{ item.name }}"
+    lc_collate: "{{ item.lc_collate | default('en_US.UTF-8') }}"
+    encoding: "{{ item.encoding | default('UTF-8') }}"
+    state: "{{ item.state | default('present') }}"
+  with_items: "{{ postgresql_databases }}"

@@ -8,6 +8,7 @@
   apt:
     pkg: "{{ item }}"
     state: latest
+    virtualenv: /scapl_environment
   with_items:
     - lib32z1-dev
     - libffi-dev
@@ -22,8 +23,10 @@
   apt:
     pkg: ftp-ssl
     state: latest
+    virtualenv: /scapl_environment
 
 - name: Install GraphViz
   apt:
     pkg: graphviz
     state: latest
+    virtualenv: /scapl_environment

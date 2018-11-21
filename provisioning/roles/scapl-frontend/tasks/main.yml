@@ -1,4 +1,7 @@
 ---
+- name: Manually create the initial virtualenv
+  command: virtualenv /scapl_environment -p python3.4 creates="/scapl_environment"
+
 # Install basic packages
 - include: packages.yml
 

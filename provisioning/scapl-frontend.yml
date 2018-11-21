@@ -3,7 +3,7 @@
   sudo: True
   roles:
     - baseline
-    - mysql
+    - postgresql
     - supervisor
     - apache
     - scapl-frontend
@@ -16,25 +16,25 @@
     scapl_component_directory: "/opt/scapl/scapl-frontend"
 
     # MySQL configuration
-    mysql_port: "3306"
-    mysql_root_password: "root"
-    mysql_users:
+    postgresql_port: "3306"
+    postgresql_root_password: "scaplpassword"
+    postgresql_users:
       - name: scapl
         host: localhost
-        password: secret
+        password: scaplpassword
         priv: "*.*:USAGE"
-    mysql_databases:
-      - name: scapl-db
+    postgresql_databases:
+      - name: scapl
         collation: utf8_general_ci
         encoding: utf8
         replicate: 1
     ufw_rules:
-      - { src: "{{ gateway }}", port: 8080 }
-      - { src: "127.0.0.1", port: "mysql" }
+      - { src: "{{ gateway }}", port: 8000 }
+      - { src: "127.0.0.1", port: 5432 }
       - { src: "{{ backbone_server }}", port: "amqp" }
 
 # TO ACTIVATE WHEN SCAPL APPLICATION EXISTS
-#    supervisor_apps:
-#      - supervisor_app_name: "frontend_app"
-#        supervisor_app_command: "celery worker -A frontend.tasks:frontend_app --hostname=frontend_app.%%h --loglevel=INFO --without-gossip --without-mingle --without-heartbeat --soft-time-limit=60 --time-limit=300"
-#        supervisor_app_user: "scapl"
+    supervisor_apps:
+      - supervisor_app_name: "frontend_app"
+        supervisor_app_command: "celery worker -A frontend.tasks:frontend_app --hostname=frontend_app.%%h --loglevel=INFO --without-gossip --without-mingle --without-heartbeat --soft-time-limit=60 --time-limit=300"
+        supervisor_app_user: "scapl"

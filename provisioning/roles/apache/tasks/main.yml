@@ -8,12 +8,28 @@
   notify:
       - restart apache2
 
-- name: apache2 listen on port 8000
-  lineinfile: dest=/etc/apache2/ports.conf regexp="^Listen 80" line="Listen 8000" attribute=present
-  notify:
-    - restart apache2
+- name: copy the apache2.conf file
+  copy:
+    src: ../files/apache2.conf
+    dest: /etc/apache2/apache2.conf
+    owner: frontend
+    group: frontend
+    mode: 0644
 
-- name: apache2 virtualhost on port 8000
-  lineinfile: dest=/etc/apache2/sites-available/000-default.conf regexp="^<VirtualHost \*:80>" line="<VirtualHost *:8000>" attribute=present
-  notify:
-    - restart apache2
+- name: copy the apache2.conf file
+  copy:
+    src: ../files/000-default.conf
+    dest: /etc/apache2/sites-available/000-default.conf
+    owner: frontend
+    group: frontend
+    mode: 0644
+
+# - name: apache2 listen on port 8000
+#   lineinfile: dest=/etc/apache2/ports.conf regexp="^Listen 80" line="Listen 8000" attribute=present
+#   notify:
+#     - restart apache2
+
+# - name: apache2 virtualhost on port 8000
+#   lineinfile: dest=/etc/apache2/sites-available/000-default.conf regexp="^<VirtualHost \*:80>" line="<VirtualHost *:8000>" attribute=present
+#   notify:
+#     - restart apache2

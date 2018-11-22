@@ -1,4 +1,25 @@
 ---
+- name: Set huge pages on 400
+  shell: sysctl vm.nr_hugepages=400
+
+- name: Test if hugepages is already set on reboot
+  shell: grep "^vm.nr_hugepages=400" /etc/sysctl.conf
+  register: test_grep
+
+- name: Add hugepages to the boot
+  lineinfile: dest=/etc/sysctl.conf line="vm.nr_hugepages=400"
+  when: test_grep.stdout != ""
+
+- name: copy the postgres service script
+  copy:
+    src: ../files/postgresql.service
+    dest: /etc/systemd/system/postgresql.service
+    owner: frontend
+    group: frontend
+    mode: 0644
+
+
+
 - name: Set PostgreSQL environment variables.
   template:
     src: postgres.sh.j2

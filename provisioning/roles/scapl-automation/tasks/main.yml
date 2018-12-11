@@ -10,21 +10,22 @@
 
 # Install SCAPL component
 - include: scapl-component.yml
+  notify: Restart ufw
 
 # Configure ufw rules
 - name: Configure ufw rules
   ufw: rule=allow src={{ item.src }} port={{ item.port }}
-  with_items: ufw_rules
+  with_items: "{{ ufw_rules }}"
   notify: Restart ufw
 
 # Create applications in supervisor
 # TO ACTIVATE WHEN SCAPL APPLICATION EXISTS
-#- name: Create apps in Supervisor
-#  template:
-#    src: supervisor_app
-#    dest: /etc/supervisor/conf.d/{{item.supervisor_app_name}}
-#    owner: root
-#    group: root
-#    mode: 0755
-#  with_items: supervisor_apps
-#  notify: Restart supervisord
+- name: Create apps in Supervisor
+  template:
+    src: supervisor_app
+    dest: /etc/supervisor/conf.d/{{item.supervisor_app_name}}
+    owner: root
+    group: root
+    mode: 0755
+  with_items: "{{ supervisor_apps }}"
+  notify: Restart supervisord

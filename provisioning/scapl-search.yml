@@ -2,8 +2,8 @@
 - hosts: scapl-search
   sudo: True
   roles:
-    - baseline
-    - supervisor
+#    - baseline
+#    - supervisor
     - scapl-search
   vars:
     # Global SCAPL-frontend configuration
@@ -12,11 +12,11 @@
     sysadmin_password: "$1$SomeSalt$LtUlD1y.JogMfbxzumljb1"
     scapl_component_name: "search"
     scapl_component_directory: "/opt/scapl/scapl-search"
-    supervisor_apps: []
     ufw_rules:
       - { src: "{{ backbone_server }}", port: "amqp" }
 
 # TO ACTIVATE WHEN SCAPL APPLICATION EXISTS
-#      - supervisor_app_name: "search_app"
-#        supervisor_app_command: "celery worker -A search.tasks:search_app --hostname=search_app.%%h --loglevel=INFO --without-gossip --without-mingle --without-heartbeat --soft-time-limit=60 --time-limit=300"
-#        supervisor_app_user: "scapl"
+    supervisor_apps:
+      - supervisor_app_name: "search_app"
+        supervisor_app_command: "celery worker -A search.tasks:search_app --hostname=search_app.%%h --loglevel=INFO --without-gossip --without-mingle --without-heartbeat --soft-time-limit=60 --time-limit=300"
+        supervisor_app_user: "scapl"

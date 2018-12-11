@@ -16,7 +16,7 @@
       - { src: "{{ backbone_server }}", port: "amqp" }
 
 # TO ACTIVATE WHEN SCAPL APPLICATION EXISTS
-#    supervisor_apps:
-#      - supervisor_app_name: "automation_app"
-#        supervisor_app_command: "celery worker -A automation.tasks:automation_app --hostname=automation_app.%%h --loglevel=INFO --without-gossip --without-mingle --without-heartbeat --soft-time-limit=60 --time-limit=300"
-#        supervisor_app_user: "scapl"
+    supervisor_apps:
+      - supervisor_app_name: "automation_app"
+        supervisor_app_command: "celery worker -A automation.tasks:automation_app --hostname=automation_app.%%h --loglevel=INFO --without-gossip --without-mingle --without-heartbeat --soft-time-limit=60 --time-limit=300"
+        supervisor_app_user: "scapl"

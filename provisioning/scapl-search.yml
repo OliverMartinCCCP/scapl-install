@@ -2,8 +2,8 @@
 - hosts: scapl-search
   sudo: True
   roles:
-#    - baseline
-#    - supervisor
+    - baseline
+    - supervisor
     - scapl-search
   vars:
     # Global SCAPL-frontend configuration
